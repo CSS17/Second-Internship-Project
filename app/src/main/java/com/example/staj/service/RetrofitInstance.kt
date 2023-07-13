@@ -12,8 +12,7 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.Date
-@Module
-@InstallIn(SingletonComponent::class)
+
 class RetrofitInstance {
     private var matches: MutableList<String> = mutableListOf()
     private var dates: MutableList<String> = mutableListOf()
@@ -26,7 +25,7 @@ class RetrofitInstance {
 
     private var date:Long = 0
 
-    @Provides
+
     fun createRetrofit(): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -34,7 +33,6 @@ class RetrofitInstance {
             .build()
     }
 
-    @Provides
     fun connectRetrofit(callback: Callback) {
          retrofit = createRetrofit()
          eventService = retrofit.create(RetrofitApi::class.java)

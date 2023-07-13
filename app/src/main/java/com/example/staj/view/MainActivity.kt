@@ -11,10 +11,10 @@ import com.example.staj.viewmodel.Matches
 import javax.inject.Inject
 
 
-class MainActivity @Inject constructor(private val instance: RetrofitInstance) : AppCompatActivity() {
+class MainActivity: AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var arrayList: ArrayList<Matches>
-    //private lateinit var retrofitInstance: RetrofitInstance
+    private lateinit var retrofitInstance: RetrofitInstance
     private var matches: MutableList<String>? = null
     private var dates: MutableList<String>? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,8 +25,8 @@ class MainActivity @Inject constructor(private val instance: RetrofitInstance) :
         recyclerView.layoutManager=LinearLayoutManager(this)
         recyclerView.setHasFixedSize(true)
 
-        //retrofitInstance=RetrofitInstance()
-        instance.connectRetrofit(object : Callback {
+        retrofitInstance=RetrofitInstance()
+        retrofitInstance.connectRetrofit(object : Callback {
             override fun onSuccess(match: MutableList<String>,date:MutableList<String>) {
                 this@MainActivity.matches = match
                 this@MainActivity.dates =date
