@@ -1,4 +1,4 @@
-package com.example.staj.viewmodel
+package com.example.staj.view
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.staj.R
+import com.example.staj.viewmodel.Matches
 
 class MyAdapter(private val matchList: ArrayList<Matches>):RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
 

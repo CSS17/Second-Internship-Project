@@ -4,11 +4,16 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.staj.models.Event
 import com.example.staj.utils.Constants.BASE_URL
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.Date
-
+@Module
+@InstallIn(SingletonComponent::class)
 class RetrofitInstance {
     private var matches: MutableList<String> = mutableListOf()
     private var dates: MutableList<String> = mutableListOf()
@@ -20,14 +25,16 @@ class RetrofitInstance {
     private lateinit var home:String
 
     private var date:Long = 0
-    private fun createRetrofit(): Retrofit {
+
+    @Provides
+    fun createRetrofit(): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 
-
+    @Provides
     fun connectRetrofit(callback: Callback) {
          retrofit = createRetrofit()
          eventService = retrofit.create(RetrofitApi::class.java)
