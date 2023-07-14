@@ -1,8 +1,11 @@
 package com.example.staj.models
 
+import com.google.gson.annotations.SerializedName
+
 data class Data(
     val diff: Boolean,
-    val e: List<E>,
+    @SerializedName("e")
+    val eventList: List<EventItem>,
     val ewc: List<Int>,
     val lse: List<Int>,
     val sc: Sc,
