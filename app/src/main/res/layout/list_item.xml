@@ -17,13 +17,14 @@
         >
         <TextView
             android:id="@+id/dates"
-            android:layout_width="100dp"
+            android:layout_width="75dp"
             android:layout_height="100dp"
             android:text="Zaman"
             android:paddingTop="30dp"
             android:textAlignment="center"
             android:background="@drawable/frame2"
             android:textColor="@color/black"
+            android:textStyle="bold"
             ></TextView>
         <LinearLayout
             android:layout_width="match_parent"
@@ -38,6 +39,8 @@
                 android:textAlignment="center"
                 android:id="@+id/matches"
                 android:textColor="@color/black"
+                android:textStyle="bold"
+                android:gravity="center"
                 ></TextView>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -47,88 +50,113 @@
                 >
 
                 <TextView
-                    android:layout_width="60dp"
+                    android:layout_width="65dp"
                     android:layout_height="20dp"
                     android:text="1"
-                    android:paddingLeft="20dp"
+                    android:textAlignment="center"
                     android:background="@drawable/frame"
-                    android:layout_weight="1"></TextView>
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    ></TextView>
                 <TextView
-                    android:layout_width="60dp"
+                    android:layout_width="65dp"
                     android:layout_height="20dp"
                     android:text="X"
-                    android:paddingLeft="20dp"
+                    android:textAlignment="center"
                     android:background="@drawable/frame"
-                    android:layout_weight="1"></TextView>
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    ></TextView>
                 <TextView
-                    android:layout_width="60dp"
+                    android:layout_width="65dp"
                     android:layout_height="20dp"
                     android:text="2"
-                    android:paddingLeft="20dp"
+                    android:textAlignment="center"
                     android:background="@drawable/frame"
-                    android:layout_weight="1"></TextView>
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    ></TextView>
                 <TextView
-                    android:layout_width="60dp"
+                    android:layout_width="65dp"
                     android:layout_height="20dp"
-                    android:text="2.5 -"
-                    android:paddingLeft="20dp"
+                    android:text="2.5 Alt"
+                    android:textAlignment="center"
                     android:background="@drawable/frame"
-                    android:layout_weight="1"></TextView>
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    ></TextView>
                 <TextView
-                    android:layout_width="60dp"
+                    android:layout_width="65dp"
                     android:layout_height="20dp"
-                    android:text="2.5 +"
-                    android:paddingLeft="20dp"
+                    android:text="2.5 Üst"
+                    android:textAlignment="center"
                     android:background="@drawable/frame"
-                    android:layout_weight="1"></TextView>
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    ></TextView>
 
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 >
 
                <TextView
                    android:id="@+id/ratio1"
-                   android:layout_width="60dp"
+                   android:layout_width="65dp"
                    android:layout_height="50dp"
                    android:text="Oran 1"
                    android:textAlignment="center"
                    android:background="@drawable/frame"
-                   android:layout_weight="1"></TextView>
+                   android:layout_weight="1"
+                   android:textStyle="bold"
+                   android:gravity="center"
+                   ></TextView>
                 <TextView
                     android:id="@+id/ratioX"
-                    android:layout_width="60dp"
+                    android:layout_width="65dp"
                     android:layout_height="50dp"
                     android:text="Oran X"
                     android:textAlignment="center"
                     android:background="@drawable/frame"
-                    android:layout_weight="1"></TextView>
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    ></TextView>
                 <TextView
                     android:id="@+id/ratio2"
-                    android:layout_width="60dp"
+                    android:layout_width="65dp"
                     android:layout_height="50dp"
                     android:text="Oran 2"
                     android:textAlignment="center"
                     android:background="@drawable/frame"
-                    android:layout_weight="1"></TextView>
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    ></TextView>
                 <TextView
-                    android:id="@+id/ratio2.5plus"
-                    android:layout_width="60dp"
+                    android:id="@+id/plus"
+                    android:layout_width="65dp"
                     android:layout_height="50dp"
                     android:text="Oran 2.5-"
                     android:textAlignment="center"
                     android:background="@drawable/frame"
-                    android:layout_weight="1"></TextView>
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    ></TextView>
                 <TextView
-                    android:id="@+id/ratio2.5minus"
-                    android:layout_width="60dp"
+                    android:id="@+id/minus"
+                    android:layout_width="65dp"
                     android:layout_height="50dp"
                     android:text="Oran 2.5+"
                     android:textAlignment="center"
                     android:background="@drawable/frame"
-                    android:layout_weight="1"></TextView>
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    ></TextView>
 
             </LinearLayout>
 

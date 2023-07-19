@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.flow
 class SportsBookRepositoryImpl(private  val service: SportsBookService): SportsBookRepository {
     override suspend fun getEventList(): Flow<Event> = flow {
         emit(service.getEvents())
+        //bu fonksiyon service icerisindeki akış içerisine değer yayınlar.
     }
 
 

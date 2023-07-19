@@ -13,8 +13,8 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class RepositoryModule {
 
-    @Provides
     @Singleton
+    @Provides
     fun provideSportsBookRepository(service: SportsBookService): SportsBookRepository {
         return SportsBookRepositoryImpl(service)
     }
