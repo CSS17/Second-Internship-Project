@@ -1,12 +1,11 @@
 package com.example.staj.repository
 
-import com.example.staj.models.Event
+import com.example.staj.models.EventResponse
 import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
 
 interface SportsBookRepository{
 
-    suspend fun getEventList():Flow<Event>
+    suspend fun getEventList():Flow<EventResponse>
 
 
 }

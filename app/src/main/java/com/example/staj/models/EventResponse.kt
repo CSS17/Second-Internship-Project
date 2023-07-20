@@ -1,6 +1,6 @@
 package com.example.staj.models
 
-data class Event(
+data class EventResponse(
     val success: Boolean,
     val data: Data
 )

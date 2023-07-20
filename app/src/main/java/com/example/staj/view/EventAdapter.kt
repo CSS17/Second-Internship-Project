@@ -9,12 +9,13 @@ import androidx.appcompat.view.menu.MenuView.ItemView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.staj.R
 import com.example.staj.models.EventItem
+import com.example.staj.view.model.UpperLowItem
 import com.example.staj.view.model.ViewItem
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-class EventAdapter(private val list: List<EventItem>,private val ratioList: List<ViewItem>):RecyclerView.Adapter<EventAdapter.MyViewHolder>() {
+class EventAdapter(private val list: List<EventItem>,private val ratioList: List<ViewItem>,private val levelList: List<UpperLowItem>):RecyclerView.Adapter<EventAdapter.MyViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -23,7 +24,7 @@ class EventAdapter(private val list: List<EventItem>,private val ratioList: List
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bindItems(list[position],ratioList[position])
+        holder.bindItems(list[position],ratioList[position],levelList[position])
     }
 
     override fun getItemCount(): Int=list.size
@@ -35,16 +36,18 @@ class EventAdapter(private val list: List<EventItem>,private val ratioList: List
         val ratio1:TextView=view.findViewById(R.id.ratio1)
         val ratiox:TextView=view.findViewById(R.id.ratioX)
         val ratio2:TextView=view.findViewById(R.id.ratio2)
-        val plus:TextView=view.findViewById(R.id.plus)
-        val minus:TextView=view.findViewById(R.id.minus)
-        
-        fun bindItems(event: EventItem,ratio:ViewItem){
+        val upper:TextView=view.findViewById(R.id.plus)
+        val lower:TextView=view.findViewById(R.id.minus)
+
+
+        fun bindItems(event: EventItem,ratio:ViewItem,level:UpperLowItem){
             matchText.text= event.name
             dateText.text=dateFormat(event.date)
             ratio1.text=ratio.ratio1
             ratiox.text=ratio.ratiox
             ratio2.text=ratio.ratio2
-
+            upper.text=level.upper
+            lower.text=level.lower
 
         }
 
