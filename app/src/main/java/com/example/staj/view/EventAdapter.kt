@@ -1,21 +1,16 @@
 package com.example.staj.view
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.appcompat.view.menu.MenuView.ItemView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.staj.R
-import com.example.staj.models.EventItem
-import com.example.staj.view.model.UpperLowItem
-import com.example.staj.view.model.ViewItem
-import java.text.DateFormat
+import com.example.staj.view.bigmodel.Mainmodel
 import java.text.SimpleDateFormat
 import java.util.*
 
-class EventAdapter(private val list: List<EventItem>,private val ratioList: List<ViewItem>,private val levelList: List<UpperLowItem>):RecyclerView.Adapter<EventAdapter.MyViewHolder>() {
+class EventAdapter(private val matchList:List<Mainmodel>):RecyclerView.Adapter<EventAdapter.MyViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -24,10 +19,10 @@ class EventAdapter(private val list: List<EventItem>,private val ratioList: List
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bindItems(list[position],ratioList[position],levelList[position])
+        holder.bindItems(matchList[position])
     }
 
-    override fun getItemCount(): Int=list.size
+    override fun getItemCount(): Int=matchList.size
 
 
     class MyViewHolder(view: View):RecyclerView.ViewHolder(view) {
@@ -40,14 +35,14 @@ class EventAdapter(private val list: List<EventItem>,private val ratioList: List
         val lower:TextView=view.findViewById(R.id.minus)
 
 
-        fun bindItems(event: EventItem,ratio:ViewItem,level:UpperLowItem){
-            matchText.text= event.name
-            dateText.text=dateFormat(event.date)
-            ratio1.text=ratio.ratio1
-            ratiox.text=ratio.ratiox
-            ratio2.text=ratio.ratio2
-            upper.text=level.upper
-            lower.text=level.lower
+        fun bindItems(item: Mainmodel){
+            matchText.text= item.matchTag.name
+            dateText.text=dateFormat(item.matchTag.date)
+            ratio1.text=item.finalRatio.ratio1
+            ratiox.text=item.finalRatio.ratiox
+            ratio2.text=item.finalRatio.ratio2
+            upper.text=item.exclusiveRatio.upper
+            lower.text=item.exclusiveRatio.lower
 
         }
 
