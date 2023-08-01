@@ -1,5 +1,6 @@
 package com.example.staj.view
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class EventAdapter(private val matchList:List<Mainmodel>):RecyclerView.Adapter<EventAdapter.MyViewHolder>() {
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view=LayoutInflater.from(parent.context).inflate(R.layout.list_item,parent,false)
