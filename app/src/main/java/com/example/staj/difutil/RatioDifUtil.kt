@@ -5,24 +5,17 @@ import com.example.staj.view.bigmodel.Mainmodel
 
 
 
-class RatioDifUtil(private val oldList: List<Mainmodel>, private val newList: List<Mainmodel>) :
-    DiffUtil.Callback() {
-
-    override fun getOldListSize(): Int {
-        return oldList.size
-    }
-
-    override fun getNewListSize(): Int {
-        return newList.size
-    }
+class RatioDifUtil(private val oldList: List<Mainmodel>, private val newList: List<Mainmodel>) : DiffUtil.Callback() {
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldList[oldItemPosition].eventId == newList[newItemPosition].eventId
+        return oldList[oldItemPosition] === newList[newItemPosition]
     }
 
+    override fun getOldListSize() = oldList.size
+
+    override fun getNewListSize() = newList.size
+
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        val oldItem = oldList[oldItemPosition]
-        val newItem = newList[newItemPosition]
-        return oldItem == newItem
+        return oldList[oldItemPosition] == newList[newItemPosition]
     }
 }

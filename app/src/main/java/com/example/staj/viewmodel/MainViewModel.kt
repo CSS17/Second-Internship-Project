@@ -48,7 +48,7 @@ class MainViewModel @Inject constructor(private val repository: SportsBookReposi
     }
 
 
-    fun getEventUpdatedData(callback: (String, SocketEvent) -> Unit) {
+    fun getEventUpdatedData(callback: (List<Mainmodel>?, List<Mainmodel>?) -> Unit) {
         Log.d("SOCKET", "DENEME İÇİNDE")
         mSocket?.on("event") { args ->
             if (args.isNotEmpty()) {
@@ -83,15 +83,23 @@ class MainViewModel @Inject constructor(private val repository: SportsBookReposi
                         Log.d("SOCKET","*")
                         val raitoHolder = data.markets.find { it.marketId.toString() == commonElements }
                         val ratio = raitoHolder?.outcomes
+                        val onValues=ratio?.map { it.no }?: emptyList()
+                        val odd1=ratio?.find { it.no==1 }
+                        val odd2=ratio?.find { it.no==2 }
+                        val odd3=ratio?.find { it.no==3 }
 
                         val oddValues = ratio?.map { it.odd } ?: emptyList()
-                        newFinalRatioList?.get(index)?.finalRatio?.ratio1 = oddValues.get(0).toString()
+                        newFinalRatioList?.get(index)?.finalRatio?.ratio1 = odd1?.odd.toString()
+                        newFinalRatioList?.get(index)?.finalRatio?.ratiox = odd2?.odd.toString()
+                        newFinalRatioList?.get(index)?.finalRatio?.ratio2 = odd3?.odd.toString()
 
                         //newFinalRatioList?.get(index)?.finalRatio?.ratiox=oddValues.get(1).toString()
                         Log.d("SOCKET", "GÜNCELLENEN DEĞER:" + oddValues)
 
                         Log.d("SOCKET", "İLK LİSTE:" + combinedList)
                         Log.d("SOCKET", "GÜNCELLENEN LİSTE:" + newFinalRatioList)
+
+
                         Log.d("SOCKET","ÖNCEKİ LİSTE İLE SONRAKİ LİSTE AYNI MI? ${combinedList == newFinalRatioList}")
                         Log.d("SOCKET","GÜNCELLENEN KIISMDAKİ DEĞER: ${newFinalRatioList?.get(index)?.finalRatio?.ratio1} ve İLK DEĞER: ${combinedList?.get(index)?.finalRatio?.ratio1}")
 
@@ -110,7 +118,7 @@ class MainViewModel @Inject constructor(private val repository: SportsBookReposi
 
 
                         val areListsEqual = combinedList == newFinalRatioList
-                        Log.d("SOCKET", "Gerçek Karşılaştırma Sonucu: $areListsEqual")
+                        Log.d("SOCKET", "BURASI KESİNLİKLE TRUE OLMASI LAZIM: $areListsEqual")
 
 
                     }
@@ -123,7 +131,7 @@ class MainViewModel @Inject constructor(private val repository: SportsBookReposi
 
                 data?.let { updatedData ->
 
-                    callback(jsonStr,data)
+                    callback(newFinalRatioList,combinedList)
                 }
                 //Log.d("SOCKET",jsonObject.toString())
 

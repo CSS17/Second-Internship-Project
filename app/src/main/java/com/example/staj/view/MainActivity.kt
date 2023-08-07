@@ -1,4 +1,5 @@
 package com.example.staj.view
+import EventAdapter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -32,15 +33,18 @@ class MainActivity: AppCompatActivity() {
         setContentView(R.layout.activity_main)
         recyclerView=findViewById<RecyclerView>(R.id.recyclerview)
         val coroutineScope = CoroutineScope(Dispatchers.Main)
-        viewModel.matchInfo.observe(this){ matchList->
-            recyclerView.adapter = EventAdapter(matchList)
+        val eventAdapter = EventAdapter(emptyList()) // Boş liste ile başlatın
+
+        viewModel.matchInfo.observe(this) { matchList ->
+            // Adapteri güncelleyin
+            eventAdapter.updateData(matchList)
+            recyclerView.adapter = eventAdapter
         }
 
         coroutineScope.launch {
-            viewModel.getEventUpdatedData { data,dataList ->
+            viewModel.getEventUpdatedData { data, dataList ->
                 runOnUiThread {
-                    //Log.d("SOCKET", "MAİN ACTİVİTY:"+data)
-                    //Log.d("SOCKET","BURAYA GELİYOR BU DA "+dataList.timestamp)
+                    data?.let { eventAdapter.updateData(it) }
                 }
             }
         }
