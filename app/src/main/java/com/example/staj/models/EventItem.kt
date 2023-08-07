@@ -9,7 +9,8 @@ data class EventItem(
     val cri: Int,
     @SerializedName("d")
     val date: Long,
-    val i: Int,
+    @SerializedName("i")
+    val eventId: Int,
     val isSo: Boolean,
     val ist: Boolean,
     val l: Boolean,

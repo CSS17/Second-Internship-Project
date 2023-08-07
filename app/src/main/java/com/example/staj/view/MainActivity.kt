@@ -16,10 +16,10 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity: AppCompatActivity() {
-     /*
-      Bu kod MainViewModel sınıfının bir ornegini olsuturur.
-      by lazy işlemi ile ihtiyac duyuldugu zaman olusturulması saglanır.
-     */
+    /*
+     Bu kod MainViewModel sınıfının bir ornegini olsuturur.
+     by lazy işlemi ile ihtiyac duyuldugu zaman olusturulması saglanır.
+    */
     private lateinit var recyclerView: RecyclerView
 
     private val viewModel by lazy {
@@ -39,18 +39,8 @@ class MainActivity: AppCompatActivity() {
         coroutineScope.launch {
             viewModel.getEventUpdatedData { data,dataList ->
                 runOnUiThread {
-                    Log.d("SOCKET", "BURAYA GELİYOR ARTIK" + data.toString())
-                    Log.d("SOCKET","BURAYA GELİYOR BU DA "+dataList?.m?.get(0)?.mi.toString())
-                }
-            }
-        }
-
-        coroutineScope.launch {
-            viewModel.getScoreUpdatedData { data,dataList ->
-                runOnUiThread {
-                    Log.d("SOCKET", "SCORE DA GELİYOR ARTIK" + data.toString())
-                    Log.d("SOCKET","SCORE DA BURAYA GELİYOR BU DA "+dataList?.i)
-                    Log.d("SOCKET","SCORE DA BURAYA GELİYOR BU DAAA "+dataList?.t)
+                    //Log.d("SOCKET", "MAİN ACTİVİTY:"+data)
+                    //Log.d("SOCKET","BURAYA GELİYOR BU DA "+dataList.timestamp)
                 }
             }
         }
@@ -60,9 +50,7 @@ class MainActivity: AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         viewModel.mSocket?.disconnect()
-        viewModel.sSocket?.disconnect()
     }
 
 
 }
-

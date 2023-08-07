@@ -38,27 +38,7 @@ object SocketHandler {
     }
 
 
-    fun initScoreUpdateSocket() {
-        if (scoreUpdateSocket == null) {
-            try {
-                val opts = IO.Options()
-                opts.forceNew = true
-                opts.reconnection = true
-                opts.timeout = -1
-                opts.multiplex = false
-                opts.transports = arrayOf(WebSocket.NAME)
-                scoreUpdateSocket = IO.socket(NetworkConstants.WebSocket.SCORE_SPACE, opts)
-            } catch (e: URISyntaxException) {
-                e.printStackTrace()
-            }
-            scoreUpdateSocket?.let {
-                Log.d("SOCKET", "ALTTAKİ 2. İF İÇERİSİNDE")
-                it.on(Socket.EVENT_CONNECT, onScoreConnect)
-                it.on(Socket.EVENT_CONNECT_ERROR, onScoreConnectionError)
-                it.connect()
-            }
-        }
-    }
+
 
 
 
