@@ -1,5 +1,6 @@
 package com.example.staj.difutil
 
+import android.util.Log
 import androidx.recyclerview.widget.DiffUtil
 import com.example.staj.view.bigmodel.Mainmodel
 
@@ -8,6 +9,7 @@ import com.example.staj.view.bigmodel.Mainmodel
 class RatioDifUtil(private val oldList: List<Mainmodel>, private val newList: List<Mainmodel>) : DiffUtil.Callback() {
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        val isequal= oldList==newList
         return oldList[oldItemPosition] === newList[newItemPosition]
     }
 

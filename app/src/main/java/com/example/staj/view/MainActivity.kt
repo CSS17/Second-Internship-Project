@@ -32,21 +32,9 @@ class MainActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         recyclerView=findViewById<RecyclerView>(R.id.recyclerview)
-        val coroutineScope = CoroutineScope(Dispatchers.Main)
-        val eventAdapter = EventAdapter(emptyList()) // Boş liste ile başlatın
 
-        viewModel.matchInfo.observe(this) { matchList ->
-            // Adapteri güncelleyin
-            eventAdapter.updateData(matchList)
-            recyclerView.adapter = eventAdapter
-        }
-
-        coroutineScope.launch {
-            viewModel.getEventUpdatedData { data, dataList ->
-                runOnUiThread {
-                    data?.let { eventAdapter.updateData(it) }
-                }
-            }
+        viewModel.matchInfo.observe(this){ matchList->
+            recyclerView.adapter = EventAdapter(matchList)
         }
 
     }
