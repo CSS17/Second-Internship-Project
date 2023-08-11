@@ -10,7 +10,8 @@ class RatioDifUtil(private val oldList: List<Mainmodel>, private val newList: Li
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
         val isequal= oldList==newList
-        return oldList[oldItemPosition] === newList[newItemPosition]
+        val isequal2=oldList[oldItemPosition]==newList[newItemPosition]
+        return oldList[oldItemPosition].eventId === newList[newItemPosition].eventId
     }
 
     override fun getOldListSize() = oldList.size
@@ -20,4 +21,6 @@ class RatioDifUtil(private val oldList: List<Mainmodel>, private val newList: Li
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
         return oldList[oldItemPosition] == newList[newItemPosition]
     }
+
+
 }

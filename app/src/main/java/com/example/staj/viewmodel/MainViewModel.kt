@@ -30,7 +30,6 @@ class MainViewModel @Inject constructor(private val repository: SportsBookReposi
     private val _matchInfoResult = MutableLiveData<List<Mainmodel>>()
     private var combinedList:List<Mainmodel>?=null
     private var newFinalRatioList:MutableList<Mainmodel>?=null
-    private val eventAdapter = EventAdapter(emptyList()) // Boş liste ile başlatın
     val gson = Gson()
 
     val matchInfo: LiveData<List<Mainmodel>>
@@ -45,13 +44,12 @@ class MainViewModel @Inject constructor(private val repository: SportsBookReposi
         getEventList()
         SocketHandler.initEventUpdateSocket()
         mSocket = SocketHandler.getSocket()
-        getEventUpdatedData { data, dataList ->
+        getEventUpdatedData()
 
-        }
     }
 
 
-    fun getEventUpdatedData(callback: (List<Mainmodel>?, List<Mainmodel>?) -> Unit) {
+    fun getEventUpdatedData() {
         Log.d("SOCKET", "DENEME İÇİNDE")
         mSocket?.on("event") { args ->
             if (args.isNotEmpty()) {
@@ -60,7 +58,7 @@ class MainViewModel @Inject constructor(private val repository: SportsBookReposi
                 // JSON veriyi 'SocketEvent' nesnesine çözümle
                 val data = gson.fromJson(jsonStr, SocketEvent::class.java)
                 val allEventIds: List<String> = eventIdList.map { it.eventId }
-                Log.d("SOCKET","TARABYA EVENTID LIST: $eventIdList")
+                Log.d("SOCKET","EVENTID LIST: $eventIdList")
                 val ratiodIds: List<String> = eventIdList.map { it.finalRatioId }
                 val exclusiveRatioIds: List<String> = eventIdList.map { it.exclusiveRatioId }
                 Log.d("SOCKET","SOKETTEN GELEN VERİ ORJİNAL:"+args[0])
@@ -107,9 +105,11 @@ class MainViewModel @Inject constructor(private val repository: SportsBookReposi
                         Log.d("SOCKET","GÜNCELLENEN KIISMDAKİ DEĞER RATIO2: ${newFinalRatioList?.get(index)?.finalRatio?.ratiox} ve İLK DEĞER: ${combinedList?.get(index)?.finalRatio?.ratiox}")
                         Log.d("SOCKET","GÜNCELLENEN KIISMDAKİ DEĞER RATIO3: ${newFinalRatioList?.get(index)?.finalRatio?.ratio2} ve İLK DEĞER: ${combinedList?.get(index)?.finalRatio?.ratio2}")
 
+                        //combinedList?.let { eventAdapter = EventAdapter(it as MutableList<Mainmodel>) }
 
 
-                        newFinalRatioList?.let { combinedList?.let { oldList-> eventAdapter.updateData(oldList,it) }  }
+                        //newFinalRatioList?.let { combinedList?.let { oldList-> eventAdapter.updateData(oldList,it) }  }
+
                         combinedList = newFinalRatioList?.map { mainModel ->
                             Mainmodel(
                                 mainModel.matchTag,
@@ -118,6 +118,7 @@ class MainViewModel @Inject constructor(private val repository: SportsBookReposi
                                 EventId(mainModel.eventId.eventId, mainModel.eventId.exclusiveRatioId, mainModel.eventId.finalRatioId)
                             )
                         }?.toList()
+
 
 
 
@@ -151,7 +152,9 @@ class MainViewModel @Inject constructor(private val repository: SportsBookReposi
                         Log.d("SOCKET","GÜNCELLENEN KIISMDAKİ ÜST DEĞERİ: ${newFinalRatioList?.get(index)?.exclusiveRatio?.upper} ve İLK ÜST DEĞER: ${combinedList?.get(index)?.exclusiveRatio?.upper}")
                         Log.d("SOCKET","GÜNCELLENEN KIISMDAKİ ALT DEĞERİ: ${newFinalRatioList?.get(index)?.exclusiveRatio?.lower} ve İLK ÜST DEĞER: ${combinedList?.get(index)?.exclusiveRatio?.lower}")
 
-                        newFinalRatioList?.let { combinedList?.let { oldList-> eventAdapter.updateData(oldList,it) }  }
+                        //combinedList?.let { eventAdapter = EventAdapter(it as MutableList<Mainmodel>) }
+
+                       // newFinalRatioList?.let { combinedList?.let { oldList-> eventAdapter.updateData(oldList,it) }  }
                         combinedList = newFinalRatioList?.map { mainModel ->
                             Mainmodel(
                                 mainModel.matchTag,
@@ -170,6 +173,9 @@ class MainViewModel @Inject constructor(private val repository: SportsBookReposi
 
                     }
 
+                    viewModelScope.launch {
+                        _matchInfoResult.value=combinedList
+                    }
 
                     Log.d("SOCKET","--------------------")
 
@@ -178,10 +184,7 @@ class MainViewModel @Inject constructor(private val repository: SportsBookReposi
                     Log.d("SOCKET","--------------------")
                 }
 
-                data?.let { updatedData ->
 
-                    callback(newFinalRatioList,combinedList)
-                }
                 //Log.d("SOCKET",jsonObject.toString())
 
             } else {

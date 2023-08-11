@@ -11,7 +11,8 @@ import com.example.staj.view.bigmodel.Mainmodel
 import java.text.SimpleDateFormat
 import java.util.*
 
-class EventAdapter(private var matchList: List<Mainmodel>) : RecyclerView.Adapter<EventAdapter.MyViewHolder>() {
+class EventAdapter() : RecyclerView.Adapter<EventAdapter.MyViewHolder>() {
+    private var matchList= mutableListOf<Mainmodel>()
     private var indexOffset = 0 // Başlangıç index değeri
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
@@ -26,22 +27,24 @@ class EventAdapter(private var matchList: List<Mainmodel>) : RecyclerView.Adapte
     override fun getItemCount(): Int = matchList.size
 
     // Veriyi güncelleme işlevi
-    fun updateData(oldList:List<Mainmodel>,newList: List<Mainmodel>) {
-        var copyOldList=oldList
-        val equal=copyOldList==newList
+    fun updateData(newList: List<Mainmodel>) {
+        //var copyOldList=oldList
+        val equal=matchList==newList
         if(equal){
-            Log.d("SOCKET","EŞİTLER")
+            Log.d("SOCKET","THEY ARE EQUAL")
         }
         else{
-            Log.d("SOCKET","EŞİT DEĞİLLER")
+            Log.d("SOCKET","THEY ARE NOT EQUAL")
         }
-        val diffCallback = RatioDifUtil(copyOldList, newList)
+        val diffCallback = RatioDifUtil(matchList, newList)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
 
         // Yeni veri listesini atayın
-        copyOldList = newList
+
+
         // Farkı hesapla ve adapterı güncelle
         diffResult.dispatchUpdatesTo(this)
+        matchList = newList as MutableList<Mainmodel>
     }
 
 
